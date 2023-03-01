@@ -1,4 +1,4 @@
-package com.example.tddpractise
+package com.example.tddpractise.domain
 
 object Validation {
 

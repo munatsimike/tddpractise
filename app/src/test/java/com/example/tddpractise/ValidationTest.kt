@@ -1,5 +1,6 @@
 package com.example.tddpractise
 
+import com.example.tddpractise.domain.Validation
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
