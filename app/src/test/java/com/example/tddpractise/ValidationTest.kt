@@ -8,7 +8,7 @@ import org.junit.runners.JUnit4
 
 @RunWith(JUnit4::class)
 class ValidationTest {
-
+    private val str = "michael"
     @Test
     fun whenTextIsEmpty() {
         val text = ""
@@ -18,8 +18,20 @@ class ValidationTest {
 
     @Test
     fun whenTextIsNotEmpty() {
-        val text = "michael"
-        val result = Validation.isTextEmpty(text)
+        val result = Validation.isTextEmpty(str)
         assertThat(result).isEqualTo(true)
+    }
+
+    @Test
+    fun whenTextIsAllLetters(){
+      val result = Validation.textContainsLettersOnly(str)
+        assertThat(result).isEqualTo(true)
+    }
+
+    @Test
+    fun whenTextIsNotAllLetters(){
+        val str = "michael7"
+        val result = Validation.textContainsLettersOnly(str)
+        assertThat(result).isEqualTo(false)
     }
 }
