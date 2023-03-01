@@ -12,14 +12,14 @@ class ValidationTest {
     @Test
     fun whenTextIsEmpty() {
         val text = ""
-        val result = Validation.validateInput(text)
+        val result = Validation.isTextEmpty(text)
         assertThat(result).isEqualTo(false)
     }
 
     @Test
     fun whenTextIsNotEmpty() {
         val text = "michael"
-        val result = Validation.validateInput(text)
+        val result = Validation.isTextEmpty(text)
         assertThat(result).isEqualTo(true)
     }
 }

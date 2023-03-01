@@ -2,7 +2,7 @@ package com.example.tddpractise.domain
 
 object Validation {
 
-    fun validateInput(text: String): Boolean {
+    fun isTextEmpty(text: String): Boolean {
         return text.isNotEmpty()
     }
 }
