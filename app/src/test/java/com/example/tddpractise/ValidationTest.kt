@@ -2,13 +2,21 @@ package com.example.tddpractise
 
 import com.example.tddpractise.domain.Validation
 import com.google.common.truth.Truth.assertThat
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
 @RunWith(JUnit4::class)
 class ValidationTest {
-    private val str = "michael"
+
+    private lateinit var str: String
+
+    @Before
+    fun setUp(){
+        str = "Michael"
+    }
+
     @Test
     fun whenTextIsEmpty() {
         val text = ""

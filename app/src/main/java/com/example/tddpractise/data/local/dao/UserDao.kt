@@ -1,5 +1,6 @@
 package com.example.tddpractise.data.local.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
@@ -13,5 +14,8 @@ interface UserDao {
 
     @Query("SELECT * FROM user WHERE id = :id")
     suspend fun getUser(id: Int): User
+
+    @Query("SELECT * FROM user")
+    fun getAllUsers(): LiveData<List<User>>
 
 }
