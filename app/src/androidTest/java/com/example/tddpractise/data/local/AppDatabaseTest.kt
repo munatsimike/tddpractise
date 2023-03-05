@@ -18,9 +18,8 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-@RunWith(AndroidJUnit4::class)
 @OptIn(ExperimentalCoroutinesApi::class)
-
+@RunWith(AndroidJUnit4::class)
 class AppDatabaseTest : TestCase() {
 
     @get:Rule
@@ -42,7 +41,7 @@ class AppDatabaseTest : TestCase() {
     }
 
     @Test
-    fun readWriteFromDatabase() = runTest {
+    fun readWriteFromDatabase() =  runTest {
         val user = User(140, "Michael", "Munatsi")
         dao.insertUser(user)
         val result = dao.getUser(140)
@@ -58,5 +57,4 @@ class AppDatabaseTest : TestCase() {
 
         assertThat(result.size).isEqualTo(2)
     }
-
 }
