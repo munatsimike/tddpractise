@@ -5,7 +5,6 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import com.example.tddpractise.model.User
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface UserDao {
