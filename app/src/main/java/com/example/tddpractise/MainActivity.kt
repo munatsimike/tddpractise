@@ -4,13 +4,17 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.tddpractise.model.User
 import com.example.tddpractise.ui.theme.TDDPractiseTheme
 
 class MainActivity : ComponentActivity() {
@@ -23,7 +27,11 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MainScreen()
+                    val showUserScreen by remember {
+                        mutableStateOf(true)
+                    }
+
+                    ToggleAddUserAndDisplayUsersScreen(showUserScreen = showUserScreen)
                 }
             }
         }
@@ -31,7 +39,17 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun MainScreen(modifier: Modifier = Modifier) {
+fun ToggleAddUserAndDisplayUsersScreen(showUserScreen: Boolean) {
+    if (showUserScreen) {
+        DisplayAddUserScreen()
+    } else {
+        val list = listOf(User(1, "Michael", "Munatsi"))
+        DisplayUsersScreen(list)
+    }
+}
+
+@Composable
+fun DisplayAddUserScreen(modifier: Modifier = Modifier) {
     var username by remember { mutableStateOf("") }
     var lastname by remember { mutableStateOf("") }
 
@@ -48,13 +66,13 @@ fun MainScreen(modifier: Modifier = Modifier) {
             ) {
             OutlinedTextField(
                 value = username,
-                label = { Text(text = "Username") },
+                label = { Text(text = "Name") },
                 onValueChange = { newText ->
                     username = newText
                 })
             OutlinedTextField(
                 value = lastname,
-                label = { Text(text = "Username") },
+                label = { Text(text = "Surname") },
                 onValueChange = { newText: String ->
                     lastname = newText
                 })
@@ -66,6 +84,22 @@ fun MainScreen(modifier: Modifier = Modifier) {
     }
 }
 
+@Composable
+fun DisplayUsersScreen(users: List<User>, modifier: Modifier = Modifier) {
+    LazyColumn(content = {
+        items(users){ user ->
+            Row {
+                Text(text = user.name)
+                Spacer(modifier = modifier.width(2.dp))
+                Text(text = user.surname)
+            }
+        }
+    },
+        modifier = modifier.testTag("users list")
+    )
+}
+
+
 @Preview(
     showBackground = true,
     device = Devices.PIXEL,
@@ -74,6 +108,6 @@ fun MainScreen(modifier: Modifier = Modifier) {
 @Composable
 fun DefaultPreview() {
     TDDPractiseTheme {
-        MainScreen()
+        DisplayAddUserScreen()
     }
 }
