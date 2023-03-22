@@ -8,4 +8,6 @@ interface Repository {
     suspend fun getUser(id: Int): User
     suspend fun insertUser(user: User)
     fun getAllUsers(): LiveData<List<User>>
+
+    suspend fun deleteAllUsers()
 }

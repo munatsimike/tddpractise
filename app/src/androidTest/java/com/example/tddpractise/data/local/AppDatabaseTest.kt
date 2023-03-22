@@ -55,10 +55,23 @@ class AppDatabaseTest {
 
     @Test
     fun getAllUsersFromDatabase() = runTest {
-        val users = listOf(User(1, "me", "mo"), User(2, "mike", "munatsi"))
-        users.forEach { user: User -> dao.insertUser(user) }
+        users().forEach { user: User -> dao.insertUser(user) }
         val result = dao.getAllUsers().getOrAwaitValue()
-
         assertThat(result.size).isEqualTo(2)
     }
+
+    @Test
+    fun deleteAllUsersFromDB() = runTest {
+        users().forEach { user: User ->
+            dao.insertUser(user)
+        }
+        val result = dao.getAllUsers().getOrAwaitValue()
+        assertThat(result.size).isEqualTo(2)
+
+        dao.deleteAllUsers()
+        assertThat(dao.getAllUsers().getOrAwaitValue().size).isEqualTo(0)
+    }
+
+    private fun users() = listOf(User(1, "me", "mo"), User(2, "mike", "munatsi"))
+
 }
